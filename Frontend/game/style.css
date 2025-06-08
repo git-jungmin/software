@@ -1,0 +1,446 @@
+/* 전체 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* 화면 전체 높이 */
+  background-image: url("gamepng.png");
+  background-size: cover; /* 이미지가 꽉 차도록 */
+  background-position: center; /* 가운데 정렬 */
+}
+
+header {
+  height: 15vh;
+  background-image: url("seotda_text_ivory.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.player-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.player-selection p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.player-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.player-btn {
+  padding: 10px 20px;
+  background-color: #678022;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.player-btn:hover {
+  background-color: #555;
+}
+
+.player-btn.active {
+  background-color: #394713;
+  font-weight: bold;
+}
+
+/* 메인 게임 영역 */
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#player-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.player-box {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.player-box.winner {
+  background-color: rgba(255, 204, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+  transform: translateY(-5px);
+}
+
+.player-box h3 {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.card {
+  width: 80px;
+  height: 120px;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+/*
+.card-image {
+    width: 90px;  원하는 너비 
+    height: auto;  비율 유지 
+}
+*/
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pattern-result {
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.winner-badge {
+  display: none;
+  background-color: #ffffff;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.player-box.winner .winner-badge {
+  display: block;
+}
+
+/* 게임 컨트롤 버튼 */
+.game-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.action-btn {
+  padding: 12px 25px;
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+.action-btn:hover {
+  background-color: #0055aa;
+}
+
+.action-btn:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+#reset-btn {
+  background-color: #cc3300;
+}
+
+#reset-btn:hover {
+  background-color: #aa2200;
+}
+
+#history-btn {
+  background-color: #339933;
+}
+
+#history-btn:hover {
+  background-color: #227722;
+}
+
+/* 족보 가이드 */
+.pattern-guide {
+  background-image: url("gamepng2.png");
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.pattern-guide h3 {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.patterns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.pattern-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #3f5c6b;
+  border-radius: 5px;
+  background-color: #fefefe;
+}
+
+.pattern-name {
+  font-weight: bold;
+  color: #ce1313;
+  text-align: center;
+  padding-bottom: 7px;
+}
+
+.pattern-info {
+  color: #333;
+  font-size: 0.95rem;
+  text-align: center;
+  padding-bottom: 7px;
+}
+
+.pattern-desc {
+  color: #333;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #1a5c2c;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+.history-item {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.history-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.history-player {
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.history-player.winner {
+  background-color: rgba(255, 204, 0, 0.3);
+}
+
+.history-cards {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.history-card {
+  width: 50px;
+  height: 75px;
+  background-color: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.history-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 게임 결과 영역 */
+.game-result {
+  text-align: center;
+  margin: 20px 0;
+  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.game-result.winner {
+  background-color: rgba(255, 204, 0, 0.3);
+  color: #ffcc00;
+}
+
+.game-result.draw {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* BGM 컨트롤 */
+.audio-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.audio-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.audio-btn:hover {
+  background-color: #555;
+}
+
+.audio-btn.active {
+  background-color: #7a4e2b;
+  color: #000;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 5px;
+  -webkit-appearance: none;
+  background: #333;
+  border-radius: 5px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #7a4e2b;
+  cursor: pointer;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .patterns {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .player-box {
+    width: 100%;
+  }
+
+  .card {
+    width: 80px;
+    height: 120px;
+  }
+
+  .game-controls {
+    flex-direction: column;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 5% auto;
+  }
+}

@@ -1,0 +1,25 @@
+<!--Frontend/main/main.html-->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>섯다 게임</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="login-section">
+        <h2>로그인</h2>
+        <input type="text" id="username" placeholder="사용자 이름 입력" /><br />
+        <input
+          type="password"
+          id="password"
+          placeholder="비밀번호 입력"
+        /><br />
+        <button onclick="autoLoginOrRegister()">시작하기</button>
+        <p id="result" style="color: rgb(0, 0, 0); margin-top: 10px"></p>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>섯다 게임</title>
+    <link rel="stylesheet" href="/game/style.css" />
+  </head>
+  <body>
+    <header>
+      <p></p>
+    </header>
+    <div class="container">
+      <div class="player-selection">
+        <!-- 플레이어 선택 영역 -->
+        <div class="player-buttons">
+          <button class="player-btn" data-players="1">1인</button>
+          <button class="player-btn" data-players="2">2인</button>
+          <button class="player-btn" data-players="3">3인</button>
+          <button class="player-btn" data-players="4">4인</button>
+        </div>
+      </div>
+
+      <div class="game-area">
+        <div id="player-container">
+          <!-- 플레이어 카드 영역 - JS로 동적 생성 -->
+        </div>
+
+        <!-- 게임 결과 영역 (승자 표시) -->
+        <div id="game-result" class="game-result" style="display: none">
+          <!-- 승자 정보가 여기에 표시됨 -->
+        </div>
+
+        <div class="game-controls">
+          <button id="start-btn" class="action-btn">게임 시작</button>
+          <button id="reset-btn" class="action-btn" disabled>초기화</button>
+          <button id="history-btn" class="action-btn">결과 기록</button>
+        </div>
+
+        <!-- BGM 컨트롤 영역 -->
+        <div class="audio-controls">
+          <button id="play-btn" class="audio-btn active">▶</button>
+          <button id="pause-btn" class="audio-btn">❚❚</button>
+          <button id="mute-btn" class="audio-btn">🔊</button>
+          <div class="volume-control">
+            <input
+              type="range"
+              id="volume-slider"
+              class="volume-slider"
+              min="0"
+              max="100"
+              value="50"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-guide">
+        <h3>섯다 족보</h3>
+        <div class="patterns">
+          <div class="pattern-item">
+            <span class="pattern-name">38광땡</span>
+            <span class="pattern-desc">3월 광 + 8월 광</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">18광땡</span>
+            <span class="pattern-desc">1월 광 + 8월 광</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">13광땡</span>
+            <span class="pattern-desc">1월 광 + 3월 광</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">장땡</span>
+            <span class="pattern-desc">10월 + 10월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">땡</span>
+            <span class="pattern-desc">동일한 월 두 패의 조합</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">알리</span>
+            <span class="pattern-desc">1월 + 2월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">독사</span>
+            <span class="pattern-desc">1월 + 4월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">구삥</span>
+            <span class="pattern-desc">9월 + 1월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">장삥</span>
+            <span class="pattern-desc">10월 + 1월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">장사</span>
+            <span class="pattern-desc">10월 + 4월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">세륙</span>
+            <span class="pattern-desc">4월 + 6월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">갑오</span>
+            <span class="pattern-desc">두 수의 합의 끝자리가 9</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">끗</span>
+            <span class="pattern-desc">나머지 조합 (1~8끗)</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">망통</span>
+            <span class="pattern-desc">두 수의 합의 끝자리가 0</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">구사</span>
+            <span class="pattern-info">(알리 이하 재경기)</span>
+            <span class="pattern-desc">4월 + 9월</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">멍텅구리 구사</span>
+            <span class="pattern-info">(9땡 이하 재경기)</span>
+            <span class="pattern-desc">4월 열끗 + 9월 열끗</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">땡잡이</span>
+            <span class="pattern-info"
+              >(1땡~9땡에게 승리 (장땡이상 제외)타깃패가 없으면 망통으로
+              취급함.)</span
+            >
+            <span class="pattern-desc">3월 광+ 7월 열끗</span>
+          </div>
+          <div class="pattern-item">
+            <span class="pattern-name">암행어사</span>
+            <span class="pattern-info"
+              >(13, 18광땡에게 승리 (38광땡 제외)타깃패가 없으면 한끗으로
+              취급함.)</span
+            >
+            <span class="pattern-desc">4월 열끗+ 7월 열끗</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 결과 기록 모달 -->
+      <div id="history-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>게임 결과 기록</h2>
+          <div id="history-container">
+            <!-- 결과 기록이 여기에 표시됩니다 -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 오디오 요소 (BGM) -->
+    <audio id="bgm" loop>
+      <source src="audio/bgm.mp3" type="audio/mp3" />
+      브라우저가 오디오를 지원하지 않습니다.
+    </audio>
+
+    <script src="game.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+/* Frontend/main/main.css */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* 화면 전체 높이 */
+  background-image: url("mainimg.jpg");
+  background-size: cover; /* 이미지가 꽉 차도록 */
+  background-position: center; /* 가운데 정렬 */
+  background-repeat: no-repeat; /* 반복 없이 */
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  margin: 50px auto;
+  width: 400px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  width: 80%;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-color: #678022;
+  border-radius: 5px;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #7e7e7e;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #678022;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #475817;
+}
